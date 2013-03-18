@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+// Life is easier if we make a constant for our port name.
 static const char* portName = "/dev/ttyS1";
 
 int main(void)
@@ -18,7 +19,7 @@ int main(void)
   // Fetch the current port settings
   tcgetattr(serialPort, &portOptions);
 
-  // Flush the port buffer before we start using it
+  // Flush the port's buffers (in and out) before we start using it
   tcflush(serialPort, TCIOFLUSH);
 
   // Set the input and output baud rates
@@ -29,6 +30,9 @@ int main(void)
   //   this program from "owning" the port and to enable receipt of data.
   //   Also, it holds the settings for number of data bits, parity, stop bits,
   //   and hardware flow control. 
+  portOptions.c_cflag |= CLOCAL;
+  portOptions.c_cflag |= CREAD;
+  // Set up the frame information.
   portOptions.c_cflag &= ~CSIZE; // clear frame size info
   portOptions.c_cflag |= CS8;    // 8 bit frames
   portOptions.c_cflag &= ~PARENB;// no parity
@@ -41,7 +45,7 @@ int main(void)
   // Flush the buffer one more time.
   tcflush(serialPort, TCIOFLUSH);
   
-  // Let's write the canonical string to the serial port.
+  // Let's write the canonical test string to the serial port.
   write(serialPort, "Hello, World!", 13);
 
   // Now, let's wait for an input from the serial port.
@@ -52,10 +56,9 @@ int main(void)
     read(serialPort,&dataIn,1);
   } while(dataIn == 0);
 
-  printf("You entered: %c\n", dataIn); 
+  printf("You entered: %c\n", dataIn);
 
-  // Don't forget to close the port!
+  // Don't forget to close the port! Failing to do so can cause problems when
+  //   attempting to execute code in another program.
   close(serialPort);
 }
-
-
