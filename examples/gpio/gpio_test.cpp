@@ -21,7 +21,7 @@ int main(void)
   
   char inputBuffer = 0; // create and clear a buffer for data from pins
   
-  char path[1024]; // nice, long buffer to hold the path name for pin access
+  char path[256]; // nice, long buffer to hold the path name for pin access
 
   // This first loop does four things:
   //   - initialize the file descriptors for the pin mode files
