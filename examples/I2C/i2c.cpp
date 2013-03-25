@@ -22,17 +22,14 @@ int main(void)
   
   // Create a file descriptor for the I2C bus
   int i2cHandle = open("/dev/i2c-2", O_RDWR);
-  printf("i2cHandle: %d\n", i2cHandle);
   
   // Tell the I2C peripheral that the device address is (or isn't) a 10-bit
   //   value. Most probably won't be.
   opResult = ioctl(i2cHandle, I2C_TENBIT, tenBitAddress);
-  printf("Tenbit result: %d\n", opResult);
   
   // Tell the I2C peripheral what the address of the device is. We're going to
   //   start out by talking to the gyro.
   opResult = ioctl(i2cHandle, I2C_SLAVE, gyroAddress);
-  printf("Connect result: %d\n", opResult);
   
   // Clear our buffers
   memset(rxBuffer, 0, sizeof(rxBuffer));
