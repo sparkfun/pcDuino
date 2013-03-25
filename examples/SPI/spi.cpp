@@ -30,6 +30,17 @@ int main(void)
     close(pinMode);
   }
   
+      // Clear the path variable...
+    memset(path,0,sizeof(path));
+    // ...then assemble the path variable for the current pin mode file...
+    sprintf(path, "%s%s%d", GPIO_MODE_PATH, GPIO_FILENAME, 12);
+    // ...and create a file descriptor...
+    int pinMode = open(path, O_RDWR);
+    // ...which we then use to set the pin mode to SPI...
+    setPinMode(pinMode, INPUT);
+    // ...and then, close the pinMode file.
+    close(pinMode);
+  
   // As usual, we begin the relationship by establishing a file object which
   //   points to the SPI device.
   int spiDev = open(spi_name, O_RDWR);
@@ -88,16 +99,18 @@ int main(void)
   struct spi_ioc_transfer xfer;
   memset(&xfer, 0, sizeof(xfer));
   char dataBuffer[2];
+  char rxBuffer = 0;
   dataBuffer[0] = 0x0B;
   dataBuffer[1] = 0x02;
   xfer.tx_buf = (unsigned long)&dataBuffer;
-  xfer.rx_buf = (unsigned long)&dataBuffer;
+  xfer.rx_buf = (unsigned long)&rxBuffer;
   xfer.len = 3;
   xfer.speed_hz = 500000;
   xfer.cs_change = 1;
+  xfer.bits_per_word = 8;
   res = ioctl(spiDev, SPI_IOC_MESSAGE(1), &xfer);
-  printf("Transfer result: %d\n", res);
-  printf("Device ID: %d\n", (int)dataBuffer[1]);
+  printf("SPI result: %d\n", res);
+  printf("Device ID: %d\n", (int)rxBuffer);
 }
 
 void setPinMode(int pinID, int mode)

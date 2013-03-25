@@ -17,7 +17,7 @@ OUTPUT = "1"
 INPUT_PU = "8"
 
 ## First, populate the arrays with file objects that we can use later.
-for i in range(20):
+for i in range(2,7):
   pinMode.append(os.path.join(GPIO_MODE_PATH, 'gpio'+str(i)))
   pinData.append(os.path.join(GPIO_PIN_PATH, 'gpio'+str(i)))
 
@@ -53,13 +53,13 @@ file.close()  ## Make sure to close the file when you're done!
 
 ## Now, for the final trick, we're going to turn on all the pins, one at a
 ##   time, then turn them off again.
-for i in range(1,20):
+for i in range(0,5):
   file = open(pinData[i], 'r+')
   file.write(HIGH)
   file.close()
   time.sleep(.25)
   
-for i in range(19,0, -1):
+for i in range(4,-1, -1):
   file = open(pinData[i], 'r+')
   file.write(LOW)
   file.close()
