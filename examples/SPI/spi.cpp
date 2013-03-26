@@ -1,3 +1,18 @@
+/***************************************************************************
+spi.cpp
+
+Example code for SPI access on the pcDuino via C++. This code *should* work
+in the future, but as of release, only SPI output works. Data presented on
+the MISO pin does not register with the device!
+
+26 Mar 2013 - Mike Hord, SparkFun Electronics
+
+This code is beerware- if you find it useful, please by me (or, for that
+matter, any other SparkFun employee you met) a pint next time you meet us at
+the local.
+
+***************************************************************************/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>

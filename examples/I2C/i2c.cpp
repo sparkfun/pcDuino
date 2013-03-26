@@ -1,3 +1,17 @@
+/***************************************************************************
+i2c.cpp
+
+Example code for I2C access on the pcDuino via C++. Example is based on the
+SparkFun 6DOF digital board (SEN-10121).
+
+26 Mar 2013 - Mike Hord, SparkFun Electronics
+
+This code is beerware- if you find it useful, please by me (or, for that
+matter, any other SparkFun employee you met) a pint next time you meet us at
+the local.
+
+***************************************************************************/
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <linux/i2c.h>
@@ -6,9 +20,6 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdio.h>
-
-// This example code shows how to interface with two devices on the same I2C
-//   bus; the hardware used is the SparkFun 6DOF digital (SEN-10121).
 
 int main(void)
 {

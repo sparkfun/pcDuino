@@ -1,3 +1,16 @@
+/***************************************************************************
+spi.h
+
+Header file for SPI test code for pcDuino.
+
+26 Mar 2013 - Mike Hord, SparkFun Electronics
+
+This code is beerware- if you find it useful, please by me (or, for that
+matter, any other SparkFun employee you met) a pint next time you meet us at
+the local.
+
+***************************************************************************/
+
 #ifndef __SPI_H__
 #define __SPI_H__
 
@@ -7,15 +20,6 @@
 #define SPI_MODE1 0x01  // rest = 0, latch on fall
 #define SPI_MODE2 0x02  // rest = 1, latch on fall
 #define SPI_MODE3 0x03  // rest = 1, latch on rise
-
-#define SPI_CLOCK_DIV1   0x00
-#define SPI_CLOCK_DIV2   0x01
-#define SPI_CLOCK_DIV4   0x02
-#define SPI_CLOCK_DIV8   0x03
-#define SPI_CLOCK_DIV16  0x04
-#define SPI_CLOCK_DIV32  0x05
-#define SPI_CLOCK_DIV64  0x06
-#define SPI_CLOCK_DIV128 0x07
 
 #define INPUT 0
 #define OUTPUT 1

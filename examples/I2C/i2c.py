@@ -1,4 +1,19 @@
+##############################################################################
+# i2c.py
+#
+# Example code for I2C bus access on the pcDuino via Python. Note that this
+# requires the python-smbus package to be installed
+#
+# 26 Mar 2013 - Mike Hord, SparkFun Electronics
+#
+# This code is beerware- if you find it useful, please by me (or, for that
+# matter, any other SparkFun employee you met) a pint next time you meet us at
+# the local.
+#
+##############################################################################
+
 #!/usr/bin/env python
+
 import smbus
 
 ## As before, we'll create an alias for our addresses, just to make things

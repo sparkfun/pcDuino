@@ -1,3 +1,16 @@
+/***************************************************************************
+analog.cpp
+
+Example code for analog I/O access on the pcDuino via C++.
+
+26 Mar 2013 - Mike Hord, SparkFun Electronics
+
+This code is beerware- if you find it useful, please by me (or, for that
+matter, any other SparkFun employee you met) a pint next time you meet us at
+the local.
+
+***************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
