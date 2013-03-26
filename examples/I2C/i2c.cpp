@@ -19,7 +19,7 @@ int main(void)
   int xlAddress = 0x53;   // accelerometer device address
   int tenBitAddress = 0;  // is the device's address 10-bit? Usually not.
   int opResult = 0;   // for error checking of operations
-  
+ 
   // Create a file descriptor for the I2C bus
   int i2cHandle = open("/dev/i2c-2", O_RDWR);
   
