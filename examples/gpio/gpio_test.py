@@ -68,13 +68,13 @@ file.close()  ## Make sure to close the file when you're done!
 
 ## Now, for the final trick, we're going to turn on all the pins, one at a
 ##   time, then turn them off again.
-for i in range(1,20):
+for i in range(0,5):
   file = open(pinData[i], 'r+')
   file.write(HIGH)
   file.close()
   time.sleep(.25)
   
-for i in range(19,0, -1):
+for i in range(4,-1, -1):
   file = open(pinData[i], 'r+')
   file.write(LOW)
   file.close()
