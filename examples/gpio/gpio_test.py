@@ -1,3 +1,18 @@
+##############################################################################
+# gpio_test.py
+#
+# Example code for GPIO access on the pcDuino via Python
+#
+# 26 Mar 2013 - Mike Hord, SparkFun Electronics
+#
+# This code is beerware- if you find it useful, please by me (or, for that
+# matter, any other SparkFun employee you met) a pint next time you meet us at
+# the local.
+#
+##############################################################################
+
+#!/usr/bin/env python
+
 import time, os
 
 ## For simplicity's sake, we'll create a string for our paths.
@@ -17,7 +32,7 @@ OUTPUT = "1"
 INPUT_PU = "8"
 
 ## First, populate the arrays with file objects that we can use later.
-for i in range(20):
+for i in range(0,20):
   pinMode.append(os.path.join(GPIO_MODE_PATH, 'gpio'+str(i)))
   pinData.append(os.path.join(GPIO_PIN_PATH, 'gpio'+str(i)))
 

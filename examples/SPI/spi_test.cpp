@@ -1,3 +1,18 @@
+/***************************************************************************
+spi.cpp
+
+Example code for SPI access on the pcDuino via C++. This code *should* work
+in the future, but as of release, only SPI output works. Data presented on
+the MISO pin does not register with the device!
+
+26 Mar 2013 - Mike Hord, SparkFun Electronics
+
+This code is beerware- if you find it useful, please by me (or, for that
+matter, any other SparkFun employee you met) a pint next time you meet us at
+the local.
+
+***************************************************************************/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -29,7 +44,7 @@ int main(void)
     // ...and then, close the pinMode file.
     close(pinMode);
   }
-  
+    
   // As usual, we begin the relationship by establishing a file object which
   //   points to the SPI device.
   int spiDev = open(spi_name, O_RDWR);
@@ -87,17 +102,20 @@ int main(void)
 
   struct spi_ioc_transfer xfer;
   memset(&xfer, 0, sizeof(xfer));
-  char dataBuffer[2];
+  char dataBuffer[3];
+  char rxBuffer[3];
   dataBuffer[0] = 0x0B;
   dataBuffer[1] = 0x02;
-  xfer.tx_buf = (unsigned long)&dataBuffer;
-  xfer.rx_buf = (unsigned long)&dataBuffer;
+  dataBuffer[2] = 0x00;
+  xfer.tx_buf = (unsigned long)dataBuffer;
+  xfer.rx_buf = (unsigned long)rxBuffer;
   xfer.len = 3;
   xfer.speed_hz = 500000;
   xfer.cs_change = 1;
+  xfer.bits_per_word = 8;
   res = ioctl(spiDev, SPI_IOC_MESSAGE(1), &xfer);
-  printf("Transfer result: %d\n", res);
-  printf("Device ID: %d\n", (int)dataBuffer[1]);
+  printf("SPI result: %d\n", res);
+  printf("Device ID: %d - %d - %d\n", rxBuffer[2], rxBuffer[1], rxBuffer[0]);
 }
 
 void setPinMode(int pinID, int mode)

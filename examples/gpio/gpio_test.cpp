@@ -1,15 +1,22 @@
+/***************************************************************************
+gpio_test.cpp
+
+Example code for GPIO access on the pcDuino via C++.
+
+26 Mar 2013 - Mike Hord, SparkFun Electronics
+
+This code is beerware- if you find it useful, please by me (or, for that
+matter, any other SparkFun employee you met) a pint next time you meet us at
+the local.
+
+***************************************************************************/
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
 #include "gpio_test.h"
-
-// First, we'll define a path and filename constant for the virtual files which
-//   represent the GPIO pins. 
-#define GPIO_MODE_PATH "/sys/devices/virtual/misc/gpio/mode/"
-#define GPIO_PIN_PATH "/sys/devices/virtual/misc/gpio/pin/"
-#define GPIO_FILENAME "gpio"
 
 // These arrays will become file descriptors for the 20 IO pin and mode files.
 int pinMode[20];
@@ -28,7 +35,7 @@ int main(void)
   //   - initialize the file descriptors for the pin data files
   //   - make the pins outputs
   //   - set all the pins low
-  for (i = 0; i < 20; i++)
+  for (i = 2; i <= 7; i++)
   {
     // Clear the path variable...
     memset(path,0,sizeof(path));
@@ -48,28 +55,28 @@ int main(void)
   
   // Now, we're going to wait for a button connected to pin 0 to be pressed
   //  before moving on with our demo.
-  setPinMode(pinMode[0], INPUT_PU);
+  setPinMode(pinMode[2], INPUT_PU);
   
   do
   {
     printf("Waiting for button press...\n");
     // This lseek() is very important- must read from the top of the file!
-    lseek(pinData[0], 0, SEEK_SET);
+    lseek(pinData[2], 0, SEEK_SET);
     // Read one byte from the pinData register. The first byte will be '1' if
     //   the pin is high and '0' if it is low.
-    read(pinData[0], &inputBuffer, 1);
+    read(pinData[2], &inputBuffer, 1);
     usleep(100000);       // Sleep for 1/10 second.
   } while (inputBuffer == HIGH);
   
   // After the button press, let's scan through and turn the lights on one
   //   at a time, the back off again. After that, we're done.
-  for (i = 1; i <= 19; i++)
+  for (i = 3; i <= 7; i++)
   {
     setPin(pinData[i], HIGH);
     printf("Pin %d HIGH\n", i);
     usleep(250000);
   }
-  for (i = 19; i >=1; i--)
+  for (i = 7; i >=3; i--)
   {
     setPin(pinData[i], LOW);
     printf("Pin %d LOW\n", i);

@@ -1,7 +1,7 @@
 /***************************************************************************
-hello_world.cpp
+i2c.h
 
-Example code for C++ programming on the pcDuino.
+Header file for the i2c test program. Currently just a placeholder.
 
 26 Mar 2013 - Mike Hord, SparkFun Electronics
 
@@ -11,10 +11,7 @@ the local.
 
 ***************************************************************************/
 
-// First, let's include the standard io functions (things like printf, etc)
-#include <stdio.h>
+#ifndef __i2c_h__
+#define __i2c_h__
 
-int main(void) // main *must* have an int declared as return type for C++!
-{
-  printf("Hello world!\n"); // print to the command line
-}
+#endif

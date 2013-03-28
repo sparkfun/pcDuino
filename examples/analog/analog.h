@@ -1,7 +1,7 @@
 /***************************************************************************
-hello_world.cpp
+analog.h
 
-Example code for C++ programming on the pcDuino.
+Header file for analog I/O access on the pcDuino via C++.
 
 26 Mar 2013 - Mike Hord, SparkFun Electronics
 
@@ -11,10 +11,17 @@ the local.
 
 ***************************************************************************/
 
-// First, let's include the standard io functions (things like printf, etc)
-#include <stdio.h>
+#ifndef __analog_h__
+#define __analog_h__
 
-int main(void) // main *must* have an int declared as return type for C++!
-{
-  printf("Hello world!\n"); // print to the command line
-}
+#define PWM_IF_PATH "/sys/class/leds/"
+#define PWM_IF_FILE "pwm"
+#define PWM_IF "brightness"
+#define PWM_MAX "max_brightness"
+
+#define ADC_IF_PATH "/proc/"
+#define ADC_IF_FILE "adc"
+
+void analogWrite(int pin, int value);
+
+#endif
