@@ -5,7 +5,7 @@ Example code for serial port access on the pcDuino via C++.
 
 26 Mar 2013 - Mike Hord, SparkFun Electronics
 
-This code is beerware- if you find it useful, please by me (or, for that
+This code is beerware- if you find it useful, please buy me (or, for that
 matter, any other SparkFun employee you met) a pint next time you meet us at
 the local.
 
@@ -29,7 +29,7 @@ int main(void)
   //   to SERIAL mode, rather than, say, GPIO mode.
   char path[256];
   
-  for (int i = 10; i<=13; i++)
+  for (int i = 0; i<=1; i++)
   {
     // Clear the path variable...
     memset(path,0,sizeof(path));
