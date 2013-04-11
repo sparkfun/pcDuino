@@ -82,8 +82,9 @@ int main(void)
   write(serialPort, "Hello, World!", 13);
 
   // Now, let's wait for an input from the serial port.
-  fcntl(serialPort, F_SETFL, 0); // block until data comes in 
-  char dataIn;
+  fcntl(serialPort, F_SETFL, 0); // block until data comes in   
+  
+  char dataIn = 0;
   do
   {
     read(serialPort,&dataIn,1);
