@@ -17,12 +17,32 @@ the local.
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "serial_test.h"
 
 // Life is easier if we make a constant for our port name.
 static const char* portName = "/dev/ttyS1";
 
 int main(void)
 {
+
+  // The very first thing we need to do is make sure that the pins are set
+  //   to SERIAL mode, rather than, say, GPIO mode.
+  char path[256];
+  
+  for (int i = 10; i<=13; i++)
+  {
+    // Clear the path variable...
+    memset(path,0,sizeof(path));
+    // ...then assemble the path variable for the current pin mode file...
+    sprintf(path, "%s%s%d", GPIO_MODE_PATH, GPIO_FILENAME, i);
+    // ...and create a file descriptor...
+    int pinMode = open(path, O_RDWR);
+    // ...which we then use to set the pin mode to SERIAL...
+    setPinMode(pinMode, SERIAL);
+    // ...and then, close the pinMode file.
+    close(pinMode);
+  }
+  
   int serialPort; // File descriptor for serial port
   struct termios portOptions; // struct to hold the port settings
   // Open the serial port as read/write, not as controlling terminal, and
@@ -74,4 +94,21 @@ int main(void)
   // Don't forget to close the port! Failing to do so can cause problems when
   //   attempting to execute code in another program.
   close(serialPort);
+}
+
+void setPinMode(int pinID, int mode)
+{
+  writeFile(pinID, mode);
+}
+
+// While it seems okay to only *read* the first value from the file, you
+//   seemingly must write four bytes to the file to get the I/O setting to
+//   work properly. This function does that.
+void writeFile(int fileID, int value)
+{
+  char buffer[4];  // A place to build our four-byte string.
+  memset((void *)buffer, 0, sizeof(buffer)); // clear the buffer out.
+  sprintf(buffer, "%d", value);
+  lseek(fileID, 0, SEEK_SET);   // Make sure we're at the top of the file!
+  int res = write(fileID, buffer, sizeof(buffer));
 }
