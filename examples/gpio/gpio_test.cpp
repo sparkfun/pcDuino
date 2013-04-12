@@ -18,9 +18,9 @@ the local.
 
 #include "gpio_test.h"
 
-// These arrays will become file descriptors for the 20 IO pin and mode files.
-int pinMode[20];
-int pinData[20];
+// These arrays will become file descriptors for the 18 IO pin and mode files.
+int pinMode[18];
+int pinData[18];
 
 int main(void)
 {
@@ -35,7 +35,7 @@ int main(void)
   //   - initialize the file descriptors for the pin data files
   //   - make the pins outputs
   //   - set all the pins low
-  for (i = 2; i <= 7; i++)
+  for (i = 3; i <= 17; i++)
   {
     // Clear the path variable...
     memset(path,0,sizeof(path));
@@ -53,7 +53,7 @@ int main(void)
     printf("Pin %d low\n", i);  // Print info to the command line.
   }
   
-  // Now, we're going to wait for a button connected to pin 0 to be pressed
+  // Now, we're going to wait for a button connected to pin 2 to be pressed
   //  before moving on with our demo.
   setPinMode(pinMode[2], INPUT_PU);
   
@@ -70,13 +70,13 @@ int main(void)
   
   // After the button press, let's scan through and turn the lights on one
   //   at a time, the back off again. After that, we're done.
-  for (i = 3; i <= 7; i++)
+  for (i = 3; i <= 17; i++)
   {
     setPin(pinData[i], HIGH);
     printf("Pin %d HIGH\n", i);
     usleep(250000);
   }
-  for (i = 7; i >=3; i--)
+  for (i = 17; i >=3; i--)
   {
     setPin(pinData[i], LOW);
     printf("Pin %d LOW\n", i);

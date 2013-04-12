@@ -32,7 +32,7 @@ OUTPUT = "1"
 INPUT_PU = "8"
 
 ## First, populate the arrays with file objects that we can use later.
-for i in range(0,20):
+for i in range(0,18):
   pinMode.append(os.path.join(GPIO_MODE_PATH, 'gpio'+str(i)))
   pinData.append(os.path.join(GPIO_PIN_PATH, 'gpio'+str(i)))
 
@@ -48,13 +48,13 @@ for pin in pinData:
   file.write(LOW)
   file.close()
 
-## Next, let's wait for a button press on pin 0.
-file = open(pinMode[0], 'r+') ## accessing pin 0 mode file
+## Next, let's wait for a button press on pin 2.
+file = open(pinMode[2], 'r+') ## accessing pin 2 mode file
 file.write(INPUT_PU)          ## make the pin input with pull up
 file.close()                  ## write the changes
 
 temp = ['']   ## a string to store the value 
-file = open(pinData[0], 'r') ## open the file
+file = open(pinData[2], 'r') ## open the file
 temp[0] = file.read()       ## fetch the pin state
 
 ## Now, wait until the button gets pressed.
@@ -68,13 +68,13 @@ file.close()  ## Make sure to close the file when you're done!
 
 ## Now, for the final trick, we're going to turn on all the pins, one at a
 ##   time, then turn them off again.
-for i in range(0,5):
+for i in range(3,17):
   file = open(pinData[i], 'r+')
   file.write(HIGH)
   file.close()
   time.sleep(.25)
   
-for i in range(4,-1, -1):
+for i in range(17,2, -1):
   file = open(pinData[i], 'r+')
   file.write(LOW)
   file.close()
