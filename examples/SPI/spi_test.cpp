@@ -19,7 +19,7 @@ the local.
 #include <string.h>
 #include <sys/ioctl.h>
 #include <linux/spi/spidev.h>
-#include "spi.h"
+#include "spi_test.h"
 
 static const char *spi_name = "/dev/spidev0.0";
 
