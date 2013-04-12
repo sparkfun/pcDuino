@@ -26,7 +26,7 @@ int main(void)
 {
   int i = 0;       // Loop iterator
   
-  char inputBuffer = 0; // create and clear a buffer for data from pins
+  char inputBuffer = HIGH; // create and clear a buffer for data from pins
   
   char path[256]; // nice, long buffer to hold the path name for pin access
 
@@ -35,7 +35,7 @@ int main(void)
   //   - initialize the file descriptors for the pin data files
   //   - make the pins outputs
   //   - set all the pins low
-  for (i = 3; i <= 17; i++)
+  for (i = 2; i <= 17; i++)
   {
     // Clear the path variable...
     memset(path,0,sizeof(path));
@@ -46,7 +46,7 @@ int main(void)
     // ...then rinse, repeat, for the pin data files.
     memset(path,0,sizeof(path));
     sprintf(path, "%s%s%d", GPIO_PIN_PATH, GPIO_FILENAME, i);
-    pinData[i] = open(path, O_RDWR);
+    pinData[i] = open(path, O_RDWR); 
     // Now that we have descriptors, make the pin an output, then set it low.
     setPinMode(pinMode[i], OUTPUT);
     setPin(pinData[i], LOW);
@@ -76,6 +76,7 @@ int main(void)
     printf("Pin %d HIGH\n", i);
     usleep(250000);
   }
+  
   for (i = 17; i >=3; i--)
   {
     setPin(pinData[i], LOW);
