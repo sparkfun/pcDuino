@@ -34,9 +34,9 @@ int main(void)
 		memset(path, 0, sizeof(path));
 		sprintf(path, "%s%s%d/%s", PWM_IF_PATH, PWM_IF_FILE , i, PWM_MAX);
 		int PWMMaxFD = open(path, O_RDONLY);
-    char PWMMaxStr[4];
-    read(PWMMaxFD, PWMMaxStr, sizeof(PWMMaxStr));
-    PWMMaxVal[i] = atoi(PWMMaxStr);
+		char PWMMaxStr[4];
+		read(PWMMaxFD, PWMMaxStr, sizeof(PWMMaxStr));
+		PWMMaxVal[i] = atoi(PWMMaxStr);
 	}
 
   // Now, we'll blast all the PWM pins to zero. 
