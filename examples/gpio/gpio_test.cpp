@@ -104,7 +104,7 @@ void writeFile(int fileID, int value)
 {
   char buffer[4];  // A place to build our four-byte string.
   memset((void *)buffer, 0, sizeof(buffer)); // clear the buffer out.
-  sprintf(buffer, "%c", value);
+  sprintf(buffer, "%d", value);
   lseek(fileID, 0, SEEK_SET);   // Make sure we're at the top of the file!
   write(fileID, buffer, sizeof(buffer));
 }
