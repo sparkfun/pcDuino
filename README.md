@@ -7,6 +7,14 @@ pcDuino
 * *[Comments Here on GitHub](https://github.com/sparkfun/pcDuino/issues)*
 * *[IRC Channel](https://www.sparkfun.com/news/263)*
 
+* **Retired Tutorials**
+  * *[pcDuino Hookup Guide](https://learn.sparkfun.com/tutorials/pcduino-hookup-guide)*
+  * *[Programming the pcDuino](https://learn.sparkfun.com/tutorials/programming-the-pcduino)*
+  * *[Using pcDuino's WiFi Dongle With the Pi](https://learn.sparkfun.com/tutorials/using-pcduinos-wifi-dongle-with-the-pi)*
+
+
+
+
 https://www.sparkfun.com/products/retired/11712
 
 This repo contains useful projects to those getting started with the pcDuino.
